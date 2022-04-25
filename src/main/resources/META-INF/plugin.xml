@@ -15,4 +15,18 @@
         <listener class="com.github.khbrndev.fheintellijfolderplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <action
+            id="my.unique.identifier"
+            class="com.github.khbrndev.fheintellijfolderplugin.actions.MyProjectViewPopupMenuAction"
+            text="MyActionName - Menu"
+        >
+            <add-to-group group-id="ProjectViewPopupMenu"/>
+
+        </action>
+
+
+
+    </actions>
 </idea-plugin>
