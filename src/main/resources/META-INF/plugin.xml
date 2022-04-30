@@ -16,15 +16,36 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
+<!--    necessary to alter the tree structure-->
+    <extensions defaultExtensionNs="com.intellij">
+        <treeStructureProvider implementation="com.github.khbrndev.fheintellijfolderplugin.MyTreeStructureProvider"/>
+    </extensions>
+
+
     <actions>
-        <action
-            id="my.unique.identifier"
-            class="com.github.khbrndev.fheintellijfolderplugin.actions.MyProjectViewPopupMenuAction"
-            text="MyActionName - Menu"
-        >
+
+        <group
+            id="com.github.khbrndev.fheintellijfolderplugin.actions.group"
+            text="Khbrn - Folding"
+            popup="true"
+            >
+
             <add-to-group group-id="ProjectViewPopupMenu"/>
 
-        </action>
+            <action
+                    id="my.unique.identifier1"
+                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ProjectViewPopupMenu.CollapseAllFoldersAction"
+                    text="Collapse All Folders [not Working]"
+            />
+
+            <action
+                    id="my.unique.identifier2"
+                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ProjectViewPopupMenu.ExpandAllFoldersAction"
+                    text="Expand All Folders [not Working]"
+            />
+
+        </group>
+
 
 
 
