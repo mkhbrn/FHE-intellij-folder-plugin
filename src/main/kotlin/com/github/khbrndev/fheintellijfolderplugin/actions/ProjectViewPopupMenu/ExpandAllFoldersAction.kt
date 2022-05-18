@@ -4,13 +4,15 @@ import com.github.khbrndev.fheintellijfolderplugin.Settings
 import com.intellij.ide.projectView.ProjectView
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.CommonDataKeys
 
 class ExpandAllFoldersAction : AnAction() {
 
     override fun actionPerformed(action: AnActionEvent) {
-        Settings.isComposed = false
-
-        if(action.project != null){
+        if (action.project != null) {
+            val element = action.getData(CommonDataKeys.VIRTUAL_FILE)
+            Settings.composedFolderList.remove(element?.url)
+//            element?.url?.let { Settings.composedFolderList.remove(it) }
             ProjectView.getInstance(action.project!!).refresh()
 
         }

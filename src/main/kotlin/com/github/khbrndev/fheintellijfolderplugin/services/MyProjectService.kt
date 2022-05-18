@@ -1,7 +1,7 @@
 package com.github.khbrndev.fheintellijfolderplugin.services
 
-import com.intellij.openapi.project.Project
 import com.github.khbrndev.fheintellijfolderplugin.MyBundle
+import com.intellij.openapi.project.Project
 
 class MyProjectService(project: Project) {
 

@@ -1,9 +1,9 @@
 package com.github.khbrndev.fheintellijfolderplugin.listeners
 
+import com.github.khbrndev.fheintellijfolderplugin.services.MyProjectService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
-import com.github.khbrndev.fheintellijfolderplugin.services.MyProjectService
 
 internal class MyProjectManagerListener : ProjectManagerListener {
 
