@@ -6,7 +6,7 @@ import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 
-class FileNode(project: Project?, value: PsiFile, viewSettings: ViewSettings?, private val presentedName: String) :
+class FoldingNode(project: Project?, value: PsiFile, viewSettings: ViewSettings?, private val presentedName: String) :
     PsiFileNode(
         project, value,
         viewSettings
