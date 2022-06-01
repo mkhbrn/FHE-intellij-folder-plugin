@@ -20,10 +20,10 @@ class MyTreeStructureProvider : TreeStructureProvider {
             val directory = parent.value as PsiDirectory
             val path = directory.virtualFile.url
             println("Filename = $path")
-            if(Settings.composedFolderList.size != 0) {
-                println("SetingsElement = ${Settings.composedFolderList[0]}")
-            }
-            if (Settings.composedFolderList.contains(path)) {
+//            if(Settings.composedFolderList.size != 0) {
+//                println("SetingsElement = ${Settings.composedFolderList[0]}")
+//            }
+            if (Settings.composedFolderListContains(path)) {
                 return createComposedFiles(path, children, viewSettings)
             }
         }

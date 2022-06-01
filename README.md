@@ -16,7 +16,7 @@
 
 Doenst work for source files e.g. `.kt .kts .class`
 
-Works for `.xml .json .html`
+Works for `.xml .json .html .sql`
 
 This warning can be safely ignored as of [this thread](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360010413299-Unexplained-Illegal-Reflective-Access-Operation-on-JreHiDpiUtil)
 

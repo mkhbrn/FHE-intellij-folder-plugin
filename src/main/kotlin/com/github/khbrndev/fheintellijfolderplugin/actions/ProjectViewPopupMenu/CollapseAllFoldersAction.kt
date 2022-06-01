@@ -26,8 +26,8 @@ class CollapseAllFoldersAction : AnAction() {
 
         println("elementUrl = ${element?.url}")
         println("elementPath = ${element?.canonicalPath}")
-
-        element?.url?.let { Settings.composedFolderList.add(it) }
+        element?.url?.let {url -> Settings.addFolderToList(url) }
+//        element?.url?.let { Settings.composedFolderList.add(it) }
         if (action.project != null) {
             ProjectView.getInstance(action.project!!).refresh()
 
