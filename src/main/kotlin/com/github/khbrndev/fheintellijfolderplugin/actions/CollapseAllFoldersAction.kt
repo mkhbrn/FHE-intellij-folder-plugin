@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin.actions.ProjectViewPopupMenu
+package com.github.khbrndev.fheintellijfolderplugin.actions
 
 import com.github.khbrndev.fheintellijfolderplugin.Settings
 import com.intellij.ide.projectView.ProjectView

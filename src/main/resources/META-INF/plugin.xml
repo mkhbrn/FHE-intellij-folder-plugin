@@ -35,16 +35,29 @@
 
             <action
                     id="my.unique.identifier1"
-                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ProjectViewPopupMenu.CollapseAllFoldersAction"
+                    class="com.github.khbrndev.fheintellijfolderplugin.actions.CollapseAllFoldersAction"
                     text="Collapse All Folders [not Working]"
             />
 
             <action
                     id="my.unique.identifier2"
-                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ProjectViewPopupMenu.ExpandAllFoldersAction"
+                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ExpandAllFoldersAction"
                     text="Expand All Folders [not Working]"
             />
 
+            <separator></separator>
+
+            <action
+                    id="my.unique.identifier3"
+                    class="com.github.khbrndev.fheintellijfolderplugin.actions.CollapseFileAction"
+                    text="Collapse Similar Files"
+            />
+
+            <action
+                    id="my.unique.identifier4"
+                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ExpandFileAction"
+                    text="Expand Similar Files"
+            />
         </group>
 
 
