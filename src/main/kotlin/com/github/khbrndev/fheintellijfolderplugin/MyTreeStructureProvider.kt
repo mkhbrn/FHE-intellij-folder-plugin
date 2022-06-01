@@ -16,6 +16,7 @@ class MyTreeStructureProvider : TreeStructureProvider {
         children: Collection<AbstractTreeNode<*>>,
         viewSettings: ViewSettings
     ): Collection<AbstractTreeNode<*>> {
+        println("parentName = " + parent.name)
         if (parent.value is PsiDirectory) {
             val directory = parent.value as PsiDirectory
             val path = directory.virtualFile.url
@@ -23,6 +24,8 @@ class MyTreeStructureProvider : TreeStructureProvider {
 //            if(Settings.composedFolderList.size != 0) {
 //                println("SetingsElement = ${Settings.composedFolderList[0]}")
 //            }
+            //TODO: aktuell können nur ganze Ordner in die Liste eingetragen werden
+            //  später soll das auch 1 oder Mehrstufig für einzelne Dateien/ alle mit dem gleichen prefix funktionieren
             if (Settings.composedFolderListContains(path)) {
                 return createComposedFiles(path, children, viewSettings)
             }
@@ -36,52 +39,73 @@ class MyTreeStructureProvider : TreeStructureProvider {
         viewSettings: ViewSettings
     ): Collection<AbstractTreeNode<*>> {
         val result = LinkedHashMap<String, AbstractTreeNode<*>>()
-        val project: Project? = Util.getCurrentProject()
-        if (project != null) {
-            val delimiter: String = "__"
-//            val maxFoldingDepth: Int = SettingConfigurable.getMaxFoldingDepth()
-            for (node in fileNodes) {
-                val nodeValue = node.value
-                if (nodeValue is PsiDirectory) {
-                    result[nodeValue.virtualFile.name] = node
-                } else if (nodeValue is PsiFile) {
-                    val psiFile = nodeValue
-                    val fileName = psiFile.name
-//                    val nameArr: Array<String> = splitFileName(fileName, delimiter, maxFoldingDepth)
-                    val nameArr = fileName.split("__")
-                    if (nameArr.size == 1) {
-                        result[fileName] = node
-                    } else {
-                        // create root node
-                        var directoryNode = result[nameArr[0]] as GroupNode?
-                        if (directoryNode == null) {
-                            directoryNode = GroupNode(
-                                project, viewSettings, GroupNavigation(directory, nameArr[0]),
-                                nameArr[0]
-                            )
-                            result[nameArr[0]] = directoryNode
-                        }
 
-                        // create subgroup node
-                        for (i in 1 until nameArr.size - 1) {
-                            var childNode = directoryNode!!.getGroupChild(nameArr[i])
-                            if (childNode == null) {
-                                childNode = GroupNode(
-                                    project, viewSettings, GroupNavigation(
-                                        directory,
-                                        nameArr[i], directoryNode.value
-                                    ), nameArr[i]
-                                )
-                                directoryNode.addChild(childNode)
-                            }
-                            directoryNode = childNode
-                        }
-                        // create file node
-                        directoryNode!!.addChild(FoldingNode(project, psiFile, viewSettings, nameArr[nameArr.size - 1]))
-                    }
-                }
-            }
+        //guard clauses
+        val project: Project? = Util.getCurrentProject()
+        if (project == null) {
+            //TODO -> sollte fileNodes sein?!
+            return result.values
         }
+        val delimiter: String = "__"
+//            val maxFoldingDepth: Int = SettingConfigurable.getMaxFoldingDepth()
+
+        for (node in fileNodes) {
+            val nodeValue = node.value
+
+            // current child is a folder
+            if (nodeValue is PsiDirectory) {
+                result[nodeValue.virtualFile.name] = node
+                continue
+            }
+
+            // current child is a file
+            if (nodeValue is PsiFile) {
+                val psiFile = nodeValue
+                val fileName = psiFile.name
+//                    val nameArr: Array<String> = splitFileName(fileName, delimiter, maxFoldingDepth)
+                val nameArr = fileName.split("__")
+
+                // file has no delimiter
+                if (nameArr.size == 1) {
+                    result[fileName] = node
+                    continue
+                }
+
+                // create root node
+                var directoryNode = result[nameArr[0]] as GroupNode?
+                if (directoryNode == null) {
+                    directoryNode = GroupNode(
+                        project, viewSettings, GroupNavigation(directory, nameArr[0]),
+                        nameArr[0]
+                    )
+                    result[nameArr[0]] = directoryNode
+                } else {
+                    println("GroupNode was NOT null -> ${directoryNode.name}")
+                }
+
+                // create subgroup node
+                val forLength = nameArr.size - 1
+                for (i in 1 until forLength) {
+                    println("nameArr = ${nameArr[i]}")
+                    var childNode = directoryNode!!.getGroupChild(nameArr[i])
+                    if (childNode == null) {
+                        childNode = GroupNode(
+                            project, viewSettings, GroupNavigation(
+                                directory,
+                                nameArr[i], directoryNode.value
+                            ), nameArr[i]
+                        )
+                        directoryNode.addChild(childNode)
+                    }
+                    directoryNode = childNode
+                }
+                // create file node
+                //println("current Added File = ${psiFile.name}")
+                directoryNode!!.addChild(FoldingNode(project, psiFile, viewSettings, nameArr[nameArr.size - 1]))
+            }
+
+        }
+        // might be deleted later
         return result.values
     }
 

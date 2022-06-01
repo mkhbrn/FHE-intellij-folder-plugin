@@ -1,6 +1,5 @@
 package com.github.khbrndev.fheintellijfolderplugin
 
-import com.intellij.icons.AllIcons
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 

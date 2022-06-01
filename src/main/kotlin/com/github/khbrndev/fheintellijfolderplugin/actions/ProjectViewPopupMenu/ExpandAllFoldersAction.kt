@@ -11,7 +11,7 @@ class ExpandAllFoldersAction : AnAction() {
     override fun actionPerformed(action: AnActionEvent) {
         if (action.project != null) {
             val element = action.getData(CommonDataKeys.VIRTUAL_FILE)
-            element?.url?.let {url -> Settings.removeFolderFromFolderList(url) }
+            element?.url?.let { url -> Settings.removeFolderFromFolderList(url) }
 //            element?.url?.let { Settings.composedFolderList.remove(it) }
             ProjectView.getInstance(action.project!!).refresh()
 

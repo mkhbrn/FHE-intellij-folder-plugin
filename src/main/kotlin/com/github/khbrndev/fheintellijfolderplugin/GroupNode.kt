@@ -25,10 +25,10 @@ class GroupNode(project: Project?, viewSettings: ViewSettings?, value: GroupNavi
         }
 
     fun getGroupChild(name: String?): GroupNode? {
-        if(name.isNullOrBlank()){
+        if (name.isNullOrBlank()) {
             return null
         }
-        if(mChildNodeList[name] == null){
+        if (mChildNodeList[name] == null) {
             return null
         }
         return mChildNodeList[name] as GroupNode
@@ -39,7 +39,7 @@ class GroupNode(project: Project?, viewSettings: ViewSettings?, value: GroupNavi
     }
 
     fun addChild(node: FoldingNode) {
-        mChildNodeList[node.name] = node
+        mChildNodeList[node.value.name] = node
     }
 
     private fun shouldCompactMiddleDirectories(): GroupNode? {

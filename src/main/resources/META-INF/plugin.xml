@@ -7,7 +7,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.services.MyApplicationService"/>
+        <applicationService
+                serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.services.MyProjectService"/>
     </extensions>
 
@@ -16,7 +17,7 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
-<!--    necessary to alter the tree structure-->
+    <!--    necessary to alter the tree structure-->
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider implementation="com.github.khbrndev.fheintellijfolderplugin.MyTreeStructureProvider"/>
     </extensions>
@@ -25,10 +26,10 @@
     <actions>
 
         <group
-            id="com.github.khbrndev.fheintellijfolderplugin.actions.group"
-            text="Khbrn - Folding"
-            popup="true"
-            >
+                id="com.github.khbrndev.fheintellijfolderplugin.actions.group"
+                text="Khbrn - Folding"
+                popup="true"
+        >
 
             <add-to-group group-id="ProjectViewPopupMenu"/>
 
@@ -45,8 +46,6 @@
             />
 
         </group>
-
-
 
 
     </actions>
