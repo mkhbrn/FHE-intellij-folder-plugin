@@ -4,6 +4,10 @@
     <name>FHE-intellij-folder-plugin</name>
     <vendor>khbrndev</vendor>
 
+    <description>
+        Folding Plugin inted to be used for .xml files in resources Android Studio
+    </description>
+
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -20,6 +24,14 @@
     <!--    necessary to alter the tree structure-->
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider implementation="com.github.khbrndev.fheintellijfolderplugin.MyTreeStructureProvider"/>
+    </extensions>
+
+    <!--    necessary to have a settings menu-->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable parentId="tools" instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
+                                 id="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
+                                 displayName="Khbrn - Settings"/>
+        <applicationService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState"/>
     </extensions>
 
 

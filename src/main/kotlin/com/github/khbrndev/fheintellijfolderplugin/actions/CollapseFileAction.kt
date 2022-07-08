@@ -4,7 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 
-class CollapseFileAction : AnAction()  {
+class CollapseFileAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val element = e.getData(CommonDataKeys.VIRTUAL_FILE)

@@ -23,7 +23,7 @@ class ExpandAllFoldersAction : AnAction() {
     override fun update(action: AnActionEvent) {
         super.update(action)
         val element = action.getData(CommonDataKeys.VIRTUAL_FILE)
-        if(element?.url?.let { Settings.composedFolderListContains(it) } == false){
+        if (element?.url?.let { Settings.composedFolderListContains(it) } == false) {
             action.presentation.isEnabled = false
         }
         println("Hello Update ${this.javaClass.name}")

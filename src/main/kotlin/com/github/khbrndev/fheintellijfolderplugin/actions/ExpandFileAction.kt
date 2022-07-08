@@ -1,11 +1,10 @@
 package com.github.khbrndev.fheintellijfolderplugin.actions
 
-import com.github.khbrndev.fheintellijfolderplugin.Settings
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 
-class ExpandFileAction : AnAction()  {
+class ExpandFileAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
 
