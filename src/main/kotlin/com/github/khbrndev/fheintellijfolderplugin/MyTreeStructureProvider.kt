@@ -1,5 +1,6 @@
 package com.github.khbrndev.fheintellijfolderplugin
 
+import com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.util.treeView.AbstractTreeNode
@@ -63,7 +64,7 @@ class MyTreeStructureProvider : TreeStructureProvider {
                 val psiFile = nodeValue
                 val fileName = psiFile.name
 //                    val nameArr: Array<String> = splitFileName(fileName, delimiter, maxFoldingDepth)
-                val nameArr = fileName.split("__")
+                val nameArr = fileName.split(this.getSeparator())
 
                 // file has no delimiter
                 if (nameArr.size == 1) {
@@ -114,6 +115,12 @@ class MyTreeStructureProvider : TreeStructureProvider {
     override fun getData(selected: MutableCollection<AbstractTreeNode<*>>, dataId: String): Any? {
         return null
     }
+
+    fun getSeparator(): String {
+        return SettingsState.getInstance().separators
+    }
+
+
 /*
 
     /**

@@ -16,7 +16,7 @@
 
 Doenst work for source files e.g. `.kt .kts .class`
 
-Works for `.xml .json .html .sql`
+Works for `.xml .json .html .sql .txt`
 
 This warning can be safely ignored as of [this thread](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360010413299-Unexplained-Illegal-Reflective-Access-Operation-on-JreHiDpiUtil)
 
@@ -32,6 +32,19 @@ action.getData([Example_Keys](https://upsource.jetbrains.com/idea-ce/file/idea-c
 
 
 </details>
+
+
+<details> <summary>Settings</summary>
+
+Settings can be found under **File** -> **Settings...** -> **Tools** -> **Khbrn - Folding**
+
+- file level separator can be edited
+- 
+
+
+</details>
+
+
 
 ## Template ToDo list
 - [x] Create a new [IntelliJ Platform Plugin Template][template] project.
