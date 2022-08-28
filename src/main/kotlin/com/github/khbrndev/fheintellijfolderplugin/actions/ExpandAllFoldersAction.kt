@@ -13,7 +13,7 @@ class ExpandAllFoldersAction : AnAction() {
             val element = action.getData(CommonDataKeys.VIRTUAL_FILE)
 
 
-            element?.url?.let {SettingsState.getInstance().removeElementFromFoldedFolderList(it) }
+            element?.url?.let { SettingsState.getInstance().removeElementFromFoldedFolderList(it) }
 //            element?.url?.let { url -> Settings.removeFolderFromFolderList(url) }
 //            element?.url?.let { Settings.composedFolderList.remove(it) }
 
@@ -26,8 +26,14 @@ class ExpandAllFoldersAction : AnAction() {
 
     override fun update(action: AnActionEvent) {
         super.update(action)
+
         val element = action.getData(CommonDataKeys.VIRTUAL_FILE)
-        if (element?.url?.let { SettingsState.getInstance().foldedFolderListContains(it) } == false) {
+        val fileIsNotAFolder: Boolean = action.getData(CommonDataKeys.PSI_FILE)?.fileType != null
+        val fileIsInFoldedFolderList: Boolean =
+            element?.url?.let { SettingsState.getInstance().foldedFolderListContains(it) } == true
+
+        // only show menu item if it's a folder and not already in the folded folders list
+        if (fileIsNotAFolder or !fileIsInFoldedFolderList) {
             action.presentation.isEnabled = false
         }
         println("Hello Update ${this.javaClass.name}")

@@ -1,11 +1,9 @@
 package com.github.khbrndev.fheintellijfolderplugin.settings
 
-import com.fasterxml.jackson.core.util.Separators
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
-import com.intellij.util.xmlb.XmlSerializerUtil
 
 /**
  * Persisted Storage that is saved in workspace between restarts
@@ -36,7 +34,6 @@ class SettingsState : PersistentStateComponent<SettingsState.State> {
     }
 
 
-
     companion object {
         fun getInstance(): SettingsState {
             return ApplicationManager.getApplication().getService(SettingsState::class.java)
@@ -44,14 +41,14 @@ class SettingsState : PersistentStateComponent<SettingsState.State> {
     }
 
 
-    fun addElementToFoldedFolderList(filepath: String){
-        if(this.getState()?.foldedFolderList?.contains(filepath) == true){
+    fun addElementToFoldedFolderList(filepath: String) {
+        if (this.getState()?.foldedFolderList?.contains(filepath) == true) {
             return
         }
         this.getState()?.foldedFolderList?.add(filepath)
     }
 
-    fun removeElementFromFoldedFolderList(filePath: String){
+    fun removeElementFromFoldedFolderList(filePath: String) {
         this.getState()?.foldedFolderList?.remove(filePath)
     }
 
@@ -63,7 +60,7 @@ class SettingsState : PersistentStateComponent<SettingsState.State> {
         return this.myState.separators
     }
 
-    fun setSeparators(separators: String){
+    fun setSeparators(separators: String) {
         this.myState.separators = separators
     }
 

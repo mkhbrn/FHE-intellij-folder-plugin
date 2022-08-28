@@ -2,19 +2,13 @@
 <idea-plugin>
     <id>com.github.khbrndev.fheintellijfolderplugin</id>
     <name>FHE-intellij-folder-plugin</name>
-    <vendor>khbrndev</vendor>
+    <vendor>mkhbrn</vendor>
 
     <description>
-        Folding Plugin inted to be used for .xml files in resources Android Studio
+        Folding Plugin intended to be used for .xml files in resources of Android Studio
     </description>
 
     <depends>com.intellij.modules.platform</depends>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.messages.MyProjectService"/>
-    </extensions>
-
-
 
     <!--    necessary to alter the tree structure-->
     <extensions defaultExtensionNs="com.intellij">
@@ -23,50 +17,32 @@
 
     <!--    necessary to have a settings menu-->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable parentId="editor" instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
+        <applicationConfigurable parentId="editor"
+                                 instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
                                  id="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
                                  displayName="Khbrn - Folding Settings"/>
         <applicationService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState"/>
     </extensions>
 
 
+<!--    Register custom actions -->
     <actions>
-
         <group
                 id="com.github.khbrndev.fheintellijfolderplugin.actions.group"
                 text="Khbrn - Folding"
                 popup="true"
         >
-
             <add-to-group group-id="ProjectViewPopupMenu"/>
-
             <action
                     id="my.unique.identifier1"
                     class="com.github.khbrndev.fheintellijfolderplugin.actions.CollapseAllFoldersAction"
                     text="Collapse All Folders [not Working]"
             />
-
             <action
                     id="my.unique.identifier2"
                     class="com.github.khbrndev.fheintellijfolderplugin.actions.ExpandAllFoldersAction"
                     text="Expand All Folders [not Working]"
             />
-
-            <separator></separator>
-
-            <action
-                    id="my.unique.identifier3"
-                    class="com.github.khbrndev.fheintellijfolderplugin.actions.CollapseFileAction"
-                    text="Collapse Similar Files"
-            />
-
-            <action
-                    id="my.unique.identifier4"
-                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ExpandFileAction"
-                    text="Expand Similar Files"
-            />
         </group>
-
-
     </actions>
 </idea-plugin>

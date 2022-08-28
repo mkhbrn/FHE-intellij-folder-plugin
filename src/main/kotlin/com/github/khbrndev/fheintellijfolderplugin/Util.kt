@@ -12,7 +12,7 @@ class Util {
             return if (projects.isNotEmpty()) projects[0] else null
         }
 
-        fun refreshProjectView(){
+        fun refreshProjectView() {
             this.getCurrentProject()?.let { ProjectView.getInstance(it).refresh() }
         }
 

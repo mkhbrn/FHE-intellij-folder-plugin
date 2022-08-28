@@ -8,7 +8,7 @@ import javax.swing.JComponent
 /**
  * Settings UI and Persistent Storage Controller
  */
-class SettingsConfigurable : Configurable{
+class SettingsConfigurable : Configurable {
 
     private lateinit var mySettingsComponent: SettingsComponent
 
@@ -16,7 +16,7 @@ class SettingsConfigurable : Configurable{
     // is registered as an applicationConfigurable EP
     // uses the name form plugin.xml
     @Nls(capitalization = Nls.Capitalization.Title)
-    override fun getDisplayName():  String? {
+    override fun getDisplayName(): String? {
         return "Khbrn - Folding"
     }
 
@@ -42,5 +42,4 @@ class SettingsConfigurable : Configurable{
         val settings = SettingsState.getInstance()
         mySettingsComponent.mySeparatorTextField.text = settings.getSeparators()
     }
-    
 }

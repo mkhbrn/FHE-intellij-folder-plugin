@@ -122,7 +122,7 @@ class MyTreeStructureProvider : TreeStructureProvider {
 
     private fun getSeparator(): String {
         var separator = SettingsState.getInstance().getSeparators()
-        if(separator == "") {
+        if (separator == "") {
             separator = " "
         }
         return separator

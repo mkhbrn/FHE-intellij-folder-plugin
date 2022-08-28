@@ -4,6 +4,12 @@
 [![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
+## Achieved
+- can fold folders
+- storage retains folded folders after restart
+- storage retains custom set separators
+
+
 ## TODO
 - 1 File composed
 - all files in folder composed
