@@ -1,5 +1,6 @@
 package com.github.khbrndev.fheintellijfolderplugin.settings
 
+import com.fasterxml.jackson.core.util.Separators
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
@@ -8,17 +9,32 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 
 /**
  * Persisted Storage that is saved in workspace between restarts
+ *
+ * is a Service/ serviceImplementation
  */
 @State(
     name = "com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState",
     storages = [Storage("FoldingPlugin.xml")]
 )
-class SettingsState : PersistentStateComponent<SettingsState> {
+class SettingsState : PersistentStateComponent<SettingsState.State> {
 
 
-    var separators: String = "__"
+    class State {
+        var separators: String = "__"
 
-    var foldedFolders: List<String> = mutableListOf()
+        var foldedFolderList: MutableSet<String> = mutableSetOf()
+    }
+
+    private var myState = State()
+
+    override fun getState(): State? {
+        return myState
+    }
+
+    override fun loadState(state: State) {
+        myState = state
+    }
+
 
 
     companion object {
@@ -27,13 +43,28 @@ class SettingsState : PersistentStateComponent<SettingsState> {
         }
     }
 
-    override fun getState(): SettingsState? {
-        return this
+
+    fun addElementToFoldedFolderList(filepath: String){
+        if(this.getState()?.foldedFolderList?.contains(filepath) == true){
+            return
+        }
+        this.getState()?.foldedFolderList?.add(filepath)
     }
 
-    override fun loadState(state: SettingsState) {
-        XmlSerializerUtil.copyBean(state, this)
+    fun removeElementFromFoldedFolderList(filePath: String){
+        this.getState()?.foldedFolderList?.remove(filePath)
     }
 
+    fun foldedFolderListContains(filePath: String): Boolean? {
+        return this.getState()?.foldedFolderList?.contains(filePath)
+    }
+
+    fun getSeparators(): String {
+        return this.myState.separators
+    }
+
+    fun setSeparators(separators: String){
+        this.myState.separators = separators
+    }
 
 }

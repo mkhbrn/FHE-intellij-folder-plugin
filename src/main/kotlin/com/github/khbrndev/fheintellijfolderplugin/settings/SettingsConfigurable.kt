@@ -1,5 +1,6 @@
 package com.github.khbrndev.fheintellijfolderplugin.settings
 
+import com.github.khbrndev.fheintellijfolderplugin.Util
 import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
@@ -13,6 +14,7 @@ class SettingsConfigurable : Configurable{
 
     // A default constructor with no arguments is required because this implementation
     // is registered as an applicationConfigurable EP
+    // uses the name form plugin.xml
     @Nls(capitalization = Nls.Capitalization.Title)
     override fun getDisplayName():  String? {
         return "Khbrn - Folding"
@@ -25,23 +27,20 @@ class SettingsConfigurable : Configurable{
 
     override fun isModified(): Boolean {
         val settings = SettingsState.getInstance()
-        var modified: Boolean = !mySettingsComponent.mySeparatorTextField.equals(settings.separators)
+        var modified: Boolean = !mySettingsComponent.mySeparatorTextField.equals(settings.getSeparators())
+
         return modified
     }
 
     override fun apply() {
         val settings = SettingsState.getInstance()
-        settings.separators = mySettingsComponent.mySeparatorTextField.text
+        settings.setSeparators(mySettingsComponent.mySeparatorTextField.text)
+        Util.refreshProjectView()
     }
 
     override fun reset() {
         val settings = SettingsState.getInstance()
-        mySettingsComponent.mySeparatorTextField.text = settings.separators
+        mySettingsComponent.mySeparatorTextField.text = settings.getSeparators()
     }
-
-    override fun getHelpTopic(): String? {
-        super.getHelpTopic()
-        return "Hopefully this should help you, soon"
-    }
-
+    
 }

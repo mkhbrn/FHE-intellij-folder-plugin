@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.github.khbrndev.fheintellijfolderplugin.nodes
 
 import com.google.common.base.CaseFormat
 import com.intellij.icons.AllIcons

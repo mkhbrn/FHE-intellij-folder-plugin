@@ -1,7 +1,7 @@
 package com.github.khbrndev.fheintellijfolderplugin.actions
 
-import com.github.khbrndev.fheintellijfolderplugin.Settings
-import com.intellij.ide.projectView.ProjectView
+import com.github.khbrndev.fheintellijfolderplugin.Util
+import com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -26,12 +26,15 @@ class CollapseAllFoldersAction : AnAction() {
 
         println("elementUrl = ${element?.url}")
         println("elementPath = ${element?.canonicalPath}")
-        element?.url?.let { url -> Settings.addFolderToList(url) }
-//        element?.url?.let { Settings.composedFolderList.add(it) }
-        if (action.project != null) {
-            ProjectView.getInstance(action.project!!).refresh()
 
-        }
+
+        element?.url?.let { SettingsState.getInstance().addElementToFoldedFolderList(it) }
+
+
+//        element?.url?.let { url -> Settings.addFolderToList(url) }
+//        element?.url?.let { Settings.composedFolderList.add(it) }
+
+        Util.refreshProjectView()
         println("action Performed by ${this.javaClass.name}")
 
     }
@@ -40,10 +43,12 @@ class CollapseAllFoldersAction : AnAction() {
      * here only light operations
      * called each time the menu is opend
      */
+    // TODO: man darf nur auf Ordner klicken um das auszuführen
+    //  nicht auf Dateien!
     override fun update(action: AnActionEvent) {
         super.update(action)
         val element = action.getData(CommonDataKeys.VIRTUAL_FILE)
-        if (element?.url?.let { Settings.composedFolderListContains(it) } == true) {
+        if (element?.url?.let { SettingsState.getInstance().foldedFolderListContains(it) } == true) {
             action.presentation.isEnabled = false
         }
         println("Hello Update ${this.javaClass.name}")

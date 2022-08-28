@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.github.khbrndev.fheintellijfolderplugin.nodes
 
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ViewSettings

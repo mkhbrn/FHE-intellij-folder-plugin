@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.github.khbrndev.fheintellijfolderplugin.nodes
 
 class GroupNavigation @JvmOverloads constructor(
     var directory: String,

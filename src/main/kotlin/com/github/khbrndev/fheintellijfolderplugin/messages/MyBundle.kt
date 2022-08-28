@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.github.khbrndev.fheintellijfolderplugin.messages
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

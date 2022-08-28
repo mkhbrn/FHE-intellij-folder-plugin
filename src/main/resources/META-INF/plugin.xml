@@ -11,15 +11,10 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService
-                serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.services.MyProjectService"/>
+        <projectService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.messages.MyProjectService"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.khbrndev.fheintellijfolderplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+
 
     <!--    necessary to alter the tree structure-->
     <extensions defaultExtensionNs="com.intellij">
@@ -28,9 +23,9 @@
 
     <!--    necessary to have a settings menu-->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable parentId="tools" instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
+        <applicationConfigurable parentId="editor" instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
                                  id="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
-                                 displayName="Khbrn - Settings"/>
+                                 displayName="Khbrn - Folding Settings"/>
         <applicationService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState"/>
     </extensions>
 

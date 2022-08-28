@@ -1,5 +1,8 @@
 package com.github.khbrndev.fheintellijfolderplugin
 
+import com.github.khbrndev.fheintellijfolderplugin.nodes.FoldingNode
+import com.github.khbrndev.fheintellijfolderplugin.nodes.GroupNavigation
+import com.github.khbrndev.fheintellijfolderplugin.nodes.GroupNode
 import com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
@@ -27,7 +30,7 @@ class MyTreeStructureProvider : TreeStructureProvider {
 //            }
             //TODO: aktuell können nur ganze Ordner in die Liste eingetragen werden
             //  später soll das auch 1 oder Mehrstufig für einzelne Dateien/ alle mit dem gleichen prefix funktionieren
-            if (Settings.composedFolderListContains(path)) {
+            if (SettingsState.getInstance().foldedFolderListContains(path) == true) {
                 return createComposedFiles(path, children, viewSettings)
             }
         }
@@ -81,6 +84,7 @@ class MyTreeStructureProvider : TreeStructureProvider {
                     )
                     result[nameArr[0]] = directoryNode
                 } else {
+
                     println("GroupNode was NOT null -> ${directoryNode.name}")
                 }
 
@@ -116,88 +120,13 @@ class MyTreeStructureProvider : TreeStructureProvider {
         return null
     }
 
-    fun getSeparator(): String {
-        return SettingsState.getInstance().separators
-    }
-
-
-/*
-
-    /**
-     * goes through all files/folders from project to the lowest level/layer file
-     *
-     * @return all children of the current folder/file
-     */
-    override fun modify(
-        parent: AbstractTreeNode<*>,
-        children: MutableCollection<AbstractTreeNode<*>>,
-        settings: ViewSettings?
-    ): MutableCollection<AbstractTreeNode<*>> {
-//        println("MODIFY Called for ${parent.name} type = ${parent.value}")
-
-        if(parent.value !is PsiDirectory){
-            return children
+    private fun getSeparator(): String {
+        var separator = SettingsState.getInstance().getSeparators()
+        if(separator == "") {
+            separator = " "
         }
-        val project = Util.getCurrentProject()
-        val nodes = ArrayList<AbstractTreeNode<*>>()
-        for (child in children) {
-            val nodeValue = child.value
-            println("child = ${child.name} value = ${child.value}")
-            if (nodeValue is PsiFile) {
-                println("child ${child.name} is a PsiFile")
-                val file = nodeValue.virtualFile
-                // if file is in composed list -> dont show it
-                var fileNameString = file?.url
-                println("canonicalFile : ${file.canonicalFile}")
-                println("canonicalPath : ${file.canonicalPath}")
-                println("presentable url : ${file.presentableUrl}")
-                println("presentable name : ${file.presentableName}")
-                println("path : ${file.path}")
-                println("project presentableurl : ${project?.presentableUrl}")
-                println("project?.basePatho : ${project?.basePath}")
-                println("project?.projectFilePath : ${project?.projectFilePath}")
-                if (Settings.composedFolderList.contains(fileNameString)) {
-
-                    println("nodeValue.name ${nodeValue.name}")
-                    println("FILE  ${fileNameString}is in composed folder")
-                    val splitName = nodeValue.name.split("__")
-
-                    var directoryNode = GroupNode(project, settings, GroupNavigation(fileNameString!!,splitName[0]),splitName[0])
-                    nodes.add(directoryNode)
-                    for ((index, value) in splitName.withIndex()){
-                        println("Im at Index:$index")
-                        if(index == 0 || index == splitName.size){
-                            continue
-                        }
-                        if(index == splitName.size -1){
-                            val myFileNode = FoldingNode(project, nodeValue, settings, splitName[splitName.size - 1])
-                            directoryNode.addChild(myFileNode)
-                            myFileNode.presentation.presentableText = splitName[splitName.size - 1]
-                            println("FileName = ${myFileNode.presentation.presentableText}")
-                            continue
-                        }
-
-                        val childNode = GroupNode(project, settings, GroupNavigation(fileNameString,splitName[index]),splitName[index])
-                        directoryNode.addChild(childNode)
-                        directoryNode = childNode
-                    }
-
-
-//                    nodes.add(myFileNode)
-
-                    println("modified file added")
-                    continue
-
-                }
-
-            }
-            nodes.add(child)
-        }
-        return nodes
+        return separator
     }
-
-
- */
 
 
 }
