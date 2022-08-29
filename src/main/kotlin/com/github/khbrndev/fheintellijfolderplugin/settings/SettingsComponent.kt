@@ -11,8 +11,8 @@ class SettingsComponent {
 
     private val myMainPanel: JPanel
 
-    private val separatorTextField = JBTextField("")
-    private val separatorLabel = JBLabel("Enter Separator: ")
+    val separatorTextField = JBTextField("")
+    val separatorLabel = JBLabel("Enter Separator: ")
 
 
     init {

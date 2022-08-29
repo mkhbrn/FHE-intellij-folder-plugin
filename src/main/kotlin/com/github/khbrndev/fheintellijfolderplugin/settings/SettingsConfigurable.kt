@@ -27,19 +27,19 @@ class SettingsConfigurable : Configurable {
 
     override fun isModified(): Boolean {
         val settings = SettingsState.getInstance()
-        var modified: Boolean = !mySettingsComponent.mySeparatorTextField.equals(settings.getSeparators())
+        var modified: Boolean = !mySettingsComponent.separatorTextField.equals(settings.getSeparators())
 
         return modified
     }
 
     override fun apply() {
         val settings = SettingsState.getInstance()
-        settings.setSeparators(mySettingsComponent.mySeparatorTextField.text)
+        settings.setSeparators(mySettingsComponent.separatorTextField.text)
         Util.refreshProjectView()
     }
 
     override fun reset() {
         val settings = SettingsState.getInstance()
-        mySettingsComponent.mySeparatorTextField.text = settings.getSeparators()
+        mySettingsComponent.separatorTextField.text = settings.getSeparators()
     }
 }

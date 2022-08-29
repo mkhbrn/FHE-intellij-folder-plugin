@@ -3,6 +3,7 @@
     <id>com.github.khbrndev.fheintellijfolderplugin</id>
     <name>FHE-intellij-folder-plugin</name>
     <vendor>mkhbrn</vendor>
+    <version>0.0.1</version>
 
     <description>
         Folding Plugin intended to be used for .xml files in resources of Android Studio
@@ -17,10 +18,10 @@
 
     <!--    necessary to have a settings menu-->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable parentId="editor"
+        <applicationConfigurable parentId="tools"
                                  instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
                                  id="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
-                                 displayName="Khbrn - Folding Settings"/>
+                                 displayName="mkhbrn - Folding Plugin"/>
         <applicationService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState"/>
     </extensions>
 
@@ -29,19 +30,19 @@
     <actions>
         <group
                 id="com.github.khbrndev.fheintellijfolderplugin.actions.group"
-                text="Khbrn - Folding"
+                text="mkhbrn - Folding"
                 popup="true"
         >
             <add-to-group group-id="ProjectViewPopupMenu"/>
             <action
                     id="my.unique.identifier1"
                     class="com.github.khbrndev.fheintellijfolderplugin.actions.CollapseAllFoldersAction"
-                    text="Collapse All Folders [not Working]"
+                    text="Collapse All Folders"
             />
             <action
                     id="my.unique.identifier2"
                     class="com.github.khbrndev.fheintellijfolderplugin.actions.ExpandAllFoldersAction"
-                    text="Expand All Folders [not Working]"
+                    text="Expand All Folders"
             />
         </group>
     </actions>
