@@ -12,15 +12,25 @@ import com.intellij.openapi.vfs.VirtualFile
 
 class GroupNode(project: Project?, viewSettings: ViewSettings?, value: GroupNavigation?, private val mName: String) :
     ProjectViewNode<GroupNavigation?>(project, value!!, viewSettings) {
-    private val mDisplayName: String
+
+    /**
+     * make folder name camelCase if it contains 1 "_"
+     */
+    private val mDisplayName: String = if (!mName.contains("_")) mName else CaseFormat.LOWER_UNDERSCORE.to(
+        CaseFormat.UPPER_CAMEL,
+        mName
+    )
+
+
     private val mChildNodeList: MutableMap<String?, AbstractTreeNode<*>> = LinkedHashMap()
-    override fun getName(): String? {
+
+    override fun getName(): String {
         return mName
     }
 
-    val displayName: String
+    private val displayName: String
         get() {
-            val childNode = shouldCompactMiddleDirectories()
+            val childNode = getSingleChildNodeOrNull()
             return if (childNode == null) mDisplayName else mDisplayName + "." + childNode.displayName
         }
 
@@ -42,7 +52,10 @@ class GroupNode(project: Project?, viewSettings: ViewSettings?, value: GroupNavi
         mChildNodeList[node.value.name] = node
     }
 
-    private fun shouldCompactMiddleDirectories(): GroupNode? {
+    /**
+     * Should compact middle directories?
+     */
+    private fun getSingleChildNodeOrNull(): GroupNode? {
         if (mChildNodeList.size == 1) {
             val node = mChildNodeList.values.iterator().next()
             if (node is GroupNode) {
@@ -52,6 +65,9 @@ class GroupNode(project: Project?, viewSettings: ViewSettings?, value: GroupNavi
         return null
     }
 
+    /**
+     * childnodes contain file?
+     */
     override fun contains(file: VirtualFile): Boolean {
         for (childNode in mChildNodeList.values) {
             val treeNode = childNode as ProjectViewNode<*>
@@ -63,21 +79,17 @@ class GroupNode(project: Project?, viewSettings: ViewSettings?, value: GroupNavi
     }
 
     override fun getChildren(): Collection<AbstractTreeNode<*>> {
-        val childNode = shouldCompactMiddleDirectories()
+        val childNode = getSingleChildNodeOrNull()
         return childNode?.children ?: mChildNodeList.values
     }
 
+    /**
+     * called each time the project structure is altered
+     * (update UI)
+     */
     override fun update(presentation: PresentationData) {
         presentation.presentableText = displayName
         presentation.setIcon(AllIcons.Nodes.Folder)
     }
 
-    init {
-        // if name contains _, we display it as upper camel style, for example story_board -> StoryBoard
-        // else just display it
-        mDisplayName = if (!mName.contains("_")) mName else CaseFormat.LOWER_UNDERSCORE.to(
-            CaseFormat.UPPER_CAMEL,
-            mName
-        )
-    }
 }

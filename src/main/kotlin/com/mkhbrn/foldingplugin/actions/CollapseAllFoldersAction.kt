@@ -1,10 +1,10 @@
 package com.mkhbrn.foldingplugin.actions
 
-import com.mkhbrn.foldingplugin.Util
-import com.mkhbrn.foldingplugin.settings.SettingsState
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.mkhbrn.foldingplugin.Util
+import com.mkhbrn.foldingplugin.settings.SettingsState
 
 class CollapseAllFoldersAction : AnAction() {
 

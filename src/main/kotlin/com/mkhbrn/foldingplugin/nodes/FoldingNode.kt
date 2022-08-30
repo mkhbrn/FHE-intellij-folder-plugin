@@ -18,7 +18,6 @@ class FoldingNode(project: Project?, value: PsiFile, viewSettings: ViewSettings?
      */
     override fun update(data: PresentationData) {
         super.update(data)
-//        println("update called : $presentedName")
         data.presentableText = presentedName
     }
 }

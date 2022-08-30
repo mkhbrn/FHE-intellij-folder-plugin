@@ -1,16 +1,15 @@
 package com.mkhbrn.foldingplugin
 
-import com.mkhbrn.foldingplugin.nodes.FoldingNode
-import com.mkhbrn.foldingplugin.nodes.GroupNavigation
-import com.mkhbrn.foldingplugin.nodes.GroupNode
-import com.mkhbrn.foldingplugin.settings.SettingsState
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiFile
-import org.jetbrains.annotations.Nullable
+import com.mkhbrn.foldingplugin.nodes.FoldingNode
+import com.mkhbrn.foldingplugin.nodes.GroupNavigation
+import com.mkhbrn.foldingplugin.nodes.GroupNode
+import com.mkhbrn.foldingplugin.settings.SettingsState
 
 class MyTreeStructureProvider : TreeStructureProvider {
 
@@ -20,6 +19,7 @@ class MyTreeStructureProvider : TreeStructureProvider {
         children: Collection<AbstractTreeNode<*>>,
         viewSettings: ViewSettings
     ): Collection<AbstractTreeNode<*>> {
+
         println("parentName = " + parent.name)
         if (parent.value is PsiDirectory) {
             val directory = parent.value as PsiDirectory
@@ -47,11 +47,8 @@ class MyTreeStructureProvider : TreeStructureProvider {
         //guard clauses
         val project: Project? = Util.getCurrentProject()
         if (project == null) {
-            //TODO -> sollte fileNodes sein?!
-            return result.values
+            return fileNodes
         }
-        val delimiter: String = "__"
-//            val maxFoldingDepth: Int = SettingConfigurable.getMaxFoldingDepth()
 
         for (node in fileNodes) {
             val nodeValue = node.value
@@ -66,7 +63,8 @@ class MyTreeStructureProvider : TreeStructureProvider {
             if (nodeValue is PsiFile) {
                 val psiFile = nodeValue
                 val fileName = psiFile.name
-//                    val nameArr: Array<String> = splitFileName(fileName, delimiter, maxFoldingDepth)
+
+                // get split filename
                 val nameArr = fileName.split(this.getSeparator())
 
                 // file has no delimiter
@@ -104,22 +102,20 @@ class MyTreeStructureProvider : TreeStructureProvider {
                     }
                     directoryNode = childNode
                 }
+
                 // create file node
-                //println("current Added File = ${psiFile.name}")
                 directoryNode!!.addChild(FoldingNode(project, psiFile, viewSettings, nameArr[nameArr.size - 1]))
             }
 
         }
-        // might be deleted later
+
         return result.values
     }
 
 
-    @Nullable
-    override fun getData(selected: MutableCollection<AbstractTreeNode<*>>, dataId: String): Any? {
-        return null
-    }
-
+    /**
+     * get Separator String
+     */
     private fun getSeparator(): String {
         var separator = SettingsState.getInstance().getSeparators()
         if (separator == "") {
@@ -127,6 +123,5 @@ class MyTreeStructureProvider : TreeStructureProvider {
         }
         return separator
     }
-
 
 }

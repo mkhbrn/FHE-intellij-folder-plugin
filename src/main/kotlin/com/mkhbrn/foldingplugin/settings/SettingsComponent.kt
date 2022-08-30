@@ -1,6 +1,7 @@
 package com.mkhbrn.foldingplugin.settings
 
-import com.intellij.ui.components.*
+import com.intellij.ui.components.JBLabel
+import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
 import javax.swing.JPanel
 

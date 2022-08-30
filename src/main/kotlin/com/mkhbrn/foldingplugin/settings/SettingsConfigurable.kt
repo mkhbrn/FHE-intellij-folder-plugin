@@ -1,7 +1,7 @@
 package com.mkhbrn.foldingplugin.settings
 
-import com.mkhbrn.foldingplugin.Util
 import com.intellij.openapi.options.Configurable
+import com.mkhbrn.foldingplugin.Util
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 
