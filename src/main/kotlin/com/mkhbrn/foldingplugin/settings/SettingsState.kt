@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin.settings
+package com.mkhbrn.foldingplugin.settings
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent

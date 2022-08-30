@@ -1,9 +1,9 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.mkhbrn.foldingplugin
 
-import com.github.khbrndev.fheintellijfolderplugin.nodes.FoldingNode
-import com.github.khbrndev.fheintellijfolderplugin.nodes.GroupNavigation
-import com.github.khbrndev.fheintellijfolderplugin.nodes.GroupNode
-import com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState
+import com.mkhbrn.foldingplugin.nodes.FoldingNode
+import com.mkhbrn.foldingplugin.nodes.GroupNavigation
+import com.mkhbrn.foldingplugin.nodes.GroupNode
+import com.mkhbrn.foldingplugin.settings.SettingsState
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.util.treeView.AbstractTreeNode

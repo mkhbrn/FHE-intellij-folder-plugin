@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.mkhbrn.foldingplugin
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.psi.xml.XmlFile

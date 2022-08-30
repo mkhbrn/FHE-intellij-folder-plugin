@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.khbrndev.fheintellijfolderplugin</id>
-    <name>FHE-intellij-folder-plugin</name>
+    <name>Folding Plugin</name>
     <vendor>mkhbrn</vendor>
     <version>0.0.1</version>
 
@@ -13,16 +13,16 @@
 
     <!--    necessary to alter the tree structure-->
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider implementation="com.github.khbrndev.fheintellijfolderplugin.MyTreeStructureProvider"/>
+        <treeStructureProvider implementation="com.mkhbrn.foldingplugin.MyTreeStructureProvider"/>
     </extensions>
 
     <!--    necessary to have a settings menu-->
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable parentId="tools"
-                                 instance="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
-                                 id="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsConfigurable"
+                                 instance="com.mkhbrn.foldingplugin.settings.SettingsConfigurable"
+                                 id="com.mkhbrn.foldingplugin.settings.SettingsConfigurable"
                                  displayName="mkhbrn - Folding Plugin"/>
-        <applicationService serviceImplementation="com.github.khbrndev.fheintellijfolderplugin.settings.SettingsState"/>
+        <applicationService serviceImplementation="com.mkhbrn.foldingplugin.settings.SettingsState"/>
     </extensions>
 
 
@@ -36,12 +36,12 @@
             <add-to-group group-id="ProjectViewPopupMenu"/>
             <action
                     id="my.unique.identifier1"
-                    class="com.github.khbrndev.fheintellijfolderplugin.actions.CollapseAllFoldersAction"
+                    class="com.mkhbrn.foldingplugin.actions.CollapseAllFoldersAction"
                     text="Collapse All Folders"
             />
             <action
                     id="my.unique.identifier2"
-                    class="com.github.khbrndev.fheintellijfolderplugin.actions.ExpandAllFoldersAction"
+                    class="com.mkhbrn.foldingplugin.actions.ExpandAllFoldersAction"
                     text="Expand All Folders"
             />
         </group>

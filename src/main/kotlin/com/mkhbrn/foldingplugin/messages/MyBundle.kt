@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin.messages
+package com.mkhbrn.foldingplugin.messages
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.Nls

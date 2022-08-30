@@ -1,4 +1,4 @@
-package com.github.khbrndev.fheintellijfolderplugin
+package com.mkhbrn.foldingplugin
 
 import com.intellij.ide.projectView.ProjectView
 import com.intellij.openapi.project.Project
@@ -13,7 +13,7 @@ class Util {
         }
 
         fun refreshProjectView() {
-            this.getCurrentProject()?.let { ProjectView.getInstance(it).refresh() }
+            getCurrentProject()?.let { ProjectView.getInstance(it).refresh() }
         }
 
     }

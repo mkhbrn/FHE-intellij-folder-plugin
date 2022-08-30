@@ -1,6 +1,6 @@
-package com.github.khbrndev.fheintellijfolderplugin.settings
+package com.mkhbrn.foldingplugin.settings
 
-import com.github.khbrndev.fheintellijfolderplugin.Util
+import com.mkhbrn.foldingplugin.Util
 import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
