@@ -1,6 +1,6 @@
 # FHE-intellij-folder-plugin
 
-The Plugin was created as part of a university course at [FHE](https://www.ai.fh-erfurt.de/)
+The Plugin was created as part of a university course at [FHE](https://www.ai.fh-erfurt.de/).\ 
 It is supposed to be used in AndroidStudio in the ProjectView (not working on Android) to make it easier to find files
 in the resources' layout folder.
 
